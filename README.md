@@ -1,3 +1,5 @@
+![logo](coco/static/logo.png)
+
 # Coco &mdash; distributive, autonomous, anonymous, open-source, for-profit, collaborative platform based on virtual shares
 
 Features
