@@ -22,3 +22,14 @@ Features
 Try out this (very simple) GUI here:  
 https://cybernetic1.github.io/  
 which shows how peers can rate each other with scores that always sum to 100%.
+
+To-do
+-----
+* anonymous forum
+* shares and rating system
+* reference to GitHub
+* ....
+
+Completed
+---------
+* 5-Dec-2018 : user login / auth
