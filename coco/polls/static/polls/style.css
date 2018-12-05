@@ -1,0 +1,11 @@
+a {
+	text-decoration: none
+}
+
+li a {
+    color: white;
+    font-size: 20px;
+    background: #21AD73;
+    border-radius: 10px;
+    padding: 5px;
+}
