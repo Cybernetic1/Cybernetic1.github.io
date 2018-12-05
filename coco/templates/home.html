@@ -7,10 +7,10 @@
 {% if user.is_authenticated %}
 {% load static %}
 
-<img src='{% static "logo.png" %}' class="center">
+<img src='{% static "logo.png" %}'>
 
 <p>
-What's up {{ user.username }}???
+What's up, {{ user.username }}???
 </p>
 {% else %}
   <p>You are not logged in</p>

@@ -2,6 +2,8 @@
 
 # Coco &mdash; distributive, autonomous, anonymous, open-source, for-profit, collaborative platform based on virtual shares
 
+The name Coco comes from "co-operative co-evolution", a kind of evolutionary algorithm.
+
 Features
 --------
 * **Autonomous** &mdash; no boss, no management, no strict hierarchy.  Teams / clusters are formed according to needs.
@@ -14,10 +16,9 @@ Features
 
 * _Free_ open-source software _sucks_ because contributors don't get paid and they have to rely on grotesque, indirect means of income.  Recently there is a new **for-profit open-source** license called [License Zero](https://licensezero.com/) with additional terms stipulating that anyone who runs or deploys the software must pay for it according to separate license conditions.  Using of this license combined with our platform, makes the money-making process completely _automatic_.
 
-
 [Design notes](https://docs.google.com/document/d/1y0G9WKx7lODFKWD4jj7wJA16FXKmiqAfGomvFbLOkDA/edit)  
 (containing tentative and / or abandoned ideas)
 
 Try out this (very simple) GUI here:  
 https://cybernetic1.github.io/  
-which shows how peers can rate each other with scores that sum to 100%.
+which shows how peers can rate each other with scores that always sum to 100%.
