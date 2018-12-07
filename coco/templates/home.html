@@ -4,16 +4,23 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
 {% load static %}
-
 <img src='{% static "logo.png" %}'>
 
-<p>
-What's up, {{ user.username }}???
-</p>
+{% if user.is_authenticated %}
+	<p>Fucked up, {{ user.username }}???</p>
+
+	<p>Notifications <br>
+Receive an automatic notification<br>
+everytime someone mentions your<br>
+@name, quotes you or answers to your<br>
+conversation.</p>
+
+	<p><a href="{% url 'logout' %}">logout</a></p>
+
 {% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">login</a>
+	<p>You are not logged in</p>
+	<a href="{% url 'login' %}">login</a>
+
 {% endif %}
 {% endblock %}
