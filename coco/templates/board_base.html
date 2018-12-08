@@ -1,0 +1,83 @@
+{% extends MACHINA_BASE_TEMPLATE_NAME %}
+{% load static %}
+{% load i18n %}
+{% load forum_permission_tags %}
+
+{% block title %}{{ MACHINA_FORUM_NAME|default:"Forum" }} &mdash; {% block sub_title %}{% endblock sub_title %}{% endblock title %}
+
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/machina.board_theme.YKY.css' %}" />
+<link rel="stylesheet" href="{% static 'css/machina.board_theme.min.css' %}" />
+{% endblock css %}
+
+{% block body %}
+{% block header %}
+
+<nav class="navbar navbar-default">
+	<div class="col-sm-4">
+	<a href="/"><img src="{% static 'logo.png' %}"></a>
+	</div>
+	<div class="col-sm-7">
+		    <form class="navbar-form" role="search" action="{% url 'forum_search:search' %}" style="padding-top:1em">
+				<input type="text" class="form-control" placeholder="{% trans '' %}" name="q">
+				<button class="btn btn-default" type="submit" style="line-height:1.11"><i class="glyphicon glyphicon-search-plus"></i></button>
+			</form>
+			<!--form class="navbar-form" role="search" action="{% url 'forum_search:search' %}">
+					<button class="btn btn-default" type="submit" style="line-height:1.11"><i class="glyphicon glyphicon-search-plus"></i></button>
+			</form-->
+	</div>
+	<div class="col-sm-1">
+		<ul class="nav navbar-nav" style="padding-top:1em">
+		  <li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:#8c6d62"><i class="glyphicon glyphicon-list"></i>
+			</a>
+			<ul class="dropdown-menu" style="position:relative;">
+
+			{% if not request.user.is_anonymous %}
+				<li><a href="{% url 'forum_member:user_subscriptions' %}" class="btn btn-link"><i class="fa fa-bookmark-o ">&nbsp;</i>{% trans "Subscriptions" %}</a></li>
+				<li><a href="{% url 'forum_member:user_posts' request.user.id %}" class="btn btn-link"><i class="fa fa-comments-o ">&nbsp;</i>{% trans "My posts" %}</a></li>
+			{% endif %}
+
+			{% get_permission 'can_access_moderation_queue' request.user as can_access_moderation_queue %}
+			{% if can_access_moderation_queue %}
+				<li><a href="{% url 'forum_moderation:queue' %}" class="btn btn-link"><i class="fa fa-gavel">&nbsp;</i>{% trans "Moderation queue" %}</a></li>
+			{% endif %}
+
+			{% if request.user.is_authenticated %}
+				<li><a href="{% url 'forum_tracking:mark_all_forums_read' %}" class="btn btn-link"><i class="fa fa-check-circle-o">&nbsp;</i>{% trans "Mark forums read" %}</a></li>
+				<li><a href="{% url 'forum_tracking:unread_topics' %}" class="btn btn-link">{% trans "Unread topics" %}</a></li>
+			{% endif %}
+
+			</ul>
+		  </li>
+		</ul>
+	</div>
+</nav>
+
+{% endblock header %}
+
+{% block breadcrumb %}{% include "partials/breadcrumb.html" %}{% endblock breadcrumb %}
+
+<div class="container" id="main_container">
+  <div class="row">
+    <div class="col-xs-12">
+      {% block messages %}{% include "partials/messages.html" %}{% endblock messages %}
+    </div>
+  </div>
+  {% block content %}
+  {% endblock content %}
+</div>
+{% endblock body %}
+
+{% block js %}
+{{ block.super }}
+<script src="{% static 'js/machina.packages.min.js' %}" type="text/javascript" charset="utf-8"></script>
+<script src="{% static 'js/machina.min.js' %}" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  $(function() {
+    machina.init();
+    {% block onbodyload %}{% endblock onbodyload %}
+  });
+</script>
+{% endblock js %}

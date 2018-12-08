@@ -1,0 +1,15 @@
+{% extends 'board_base.html' %}
+{% load i18n %}
+{% load mptt_tags %}
+{% load forum_tags %}
+
+{% block sub_title %}{% trans "Index" %}{% endblock sub_title %}
+
+{% block content %}
+{% forum_list forums %}
+<div class="row">
+  <div class="forum-page-statistics col-xs-12">
+    <p class="statistics">{% trans "# posts:" %}&nbsp;<b>{{ total_posts_count }}</b>&nbsp;&#8226;&nbsp;{% trans "# topics:" %}&nbsp;<b>{{ total_topics_count }}</b>&nbsp;</p>
+  </div>
+</div>
+{% endblock content %}

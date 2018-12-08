@@ -1,0 +1,102 @@
+Metadata-Version: 2.1
+Name: django-machina
+Version: 0.7.1
+Summary: A Django forum engine for building powerful community driven websites.
+Home-page: https://github.com/ellmetha/django-machina
+Author: Morgan Aubert
+Author-email: morgan.aubert@zoho.com
+License: BSD
+Keywords: django forum board messages
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content :: Message Boards
+Requires-Dist: django (>=1.11)
+Requires-Dist: django-mptt (>=0.8)
+Requires-Dist: django-haystack (>=2.1)
+Requires-Dist: pillow (>=2.2)
+Requires-Dist: markdown2 (>=2.3)
+Requires-Dist: django-widget-tweaks (>=1.4)
+
+##############
+Django-machina
+##############
+
+Django-machina is a forum framework for Django providing a way to build community-driven websites.
+It offers a full-featured yet very extensible forum solution:
+
+* Topic and post editing
+* Forums tree management
+* Per-forum permissions
+* Anonymous posting
+* Polls and attachments
+* Moderation and pre-moderation
+* Forum conversations search
+* ...
+
+.. image:: https://raw.githubusercontent.com/ellmetha/django-machina/master/docs/_images/machina_forum_header.png
+    :target: https://django-machina.readthedocs.org/
+
+|
+
+Django-machina was built with integration in mind: the application is designed to be used inside
+existing Django applications. It is not a standalone forum solution.
+
+Django-machina was built with customization and extensibility in mind: each single functionality
+of the application can be customized or overriden to accommodate with your needs. In fact,
+django-machina uses the same techniques as those introduced by the famous django-oscar_ e-commerce
+framework to allow powerfull customizations.
+
+.. _django-oscar: https://github.com/django-oscar/django-oscar
+
+.. contents:: Table of Contents
+    :local:
+
+Documentation
+=============
+
+Online browsable documentation is available at https://django-machina.readthedocs.org.
+
+Head over to the documentation for all the details on how to set up your forum and how to customize
+it to suit your needs.
+
+Requirements
+============
+
+Python 2.7+ or 3.4+, Django 1.11+. Please refer to the requirements_ section of the documentation for
+a full list of dependencies.
+
+.. _requirements: https://django-machina.readthedocs.org/en/latest/getting_started.html#requirements
+
+Demo site
+=========
+
+A demo sites can be tested at https://vanilla.machina-forum.io. It contains a standard installation
+of django-machina without any customizations.
+
+Authors
+=======
+
+Morgan Aubert (`@ellmetha <https://github.com/ellmetha>`_) and contributors_. See ``AUTHORS`` for
+more details.
+
+.. _contributors: https://github.com/ellmetha/django-machina/contributors
+
+License
+=======
+
+BSD. See ``LICENSE`` for more details.
+
+
