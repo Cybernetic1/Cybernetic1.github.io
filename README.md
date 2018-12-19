@@ -1,6 +1,6 @@
 ![logo](coco/static/logo.png)
 
-# Coco &mdash; distributive, autonomous, anonymous, open-source, for-profit, collaborative platform based on virtual shares
+# Coco &mdash; decentralized, autonomous, anonymous, open-source, for-profit, collaborative platform based on virtual shares
 
 The name Coco comes from "co-operative co-evolution", a kind of evolutionary algorithm.
 
@@ -34,7 +34,7 @@ which shows how peers can rate each other with scores that always sum to 100%.
 
 Similar Projects
 ----------------
-We are considering collaboration with [Colony.io](https://colony.io/)
+We are considering collaboration with [Colony.io](https://colony.io/) which is based on Ethereum.
 
 To-do
 -----
