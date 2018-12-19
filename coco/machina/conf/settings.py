@@ -16,7 +16,7 @@ from django.conf import settings
 
 
 # General
-MACHINA_FORUM_NAME = "COCO"
+MACHINA_FORUM_NAME = getattr(settings, 'MACHINA_FORUM_NAME', 'Machina')
 MACHINA_MARKUP_LANGUAGE = getattr(
     settings, 'MACHINA_MARKUP_LANGUAGE',
     ('machina.core.markdown.markdown', {'safe_mode': True, 'extras': {'break-on-newline': True}}))

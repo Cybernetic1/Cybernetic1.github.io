@@ -4,6 +4,10 @@
 
 The name Coco comes from "co-operative co-evolution", a kind of evolutionary algorithm.
 
+* A company's **stock prices** are determined externally by the free-market ("invisible hand")
+
+* How the company distributes its **shares** are decided internally;  This is where COCO tries to innovate.
+
 Features
 --------
 * **Autonomous** &mdash; no boss, no management, no strict hierarchy.  Teams / clusters are formed according to needs.
@@ -20,12 +24,17 @@ Features
 
 * This platform could be developed by an anonymous team using this platform **itself**, sort of "recursively".
 
-[Design notes](https://docs.google.com/document/d/1y0G9WKx7lODFKWD4jj7wJA16FXKmiqAfGomvFbLOkDA/edit)  
-(rather disorganized, containing tentative and / or abandoned ideas)
+White paper (draft, contains tentative ideas):  
+[&mdash; Chinese version](COCO-white-paper-cn.pdf)  
+[&mdash; English version](COCO-white-paper-en.pdf)  
 
 Try out this (very simple) GUI here:  
 https://cybernetic1.github.io/  
 which shows how peers can rate each other with scores that always sum to 100%.
+
+Similar Projects
+----------------
+We are considering collaboration with [Colony.io](https://colony.io/)
 
 To-do
 -----

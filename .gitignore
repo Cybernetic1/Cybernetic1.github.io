@@ -18,3 +18,11 @@
 /coco/haystack/
 /coco/js_asset/
 /coco/widget_tweaks/
+
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.log
+*.run.xml
+*.synctex.gz
