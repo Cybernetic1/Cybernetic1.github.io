@@ -24,7 +24,7 @@ SECRET_KEY = '+*59mkfm4#fjl_54$8fov3*r1tm*=cus4toz1#3y31@n#hxs2='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cybernetic1.pythonanywhere.com']
 
 
 # Application definition
@@ -68,6 +68,7 @@ TEMPLATES = [
 		'BACKEND': 'django.template.backends.django.DjangoTemplates',
 		'DIRS': (
 			# [os.path.join(BASE_DIR, 'templates')],
+			'/home/Cybernetic1/coco/templates',
 			'templates',
 			MACHINA_MAIN_TEMPLATE_DIR,
 			),
@@ -151,12 +152,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+STATIC_ROOT = '/home/Cybernetic1/coco/static/'
 STATIC_URL = '/static/'
 
 from machina import MACHINA_MAIN_STATIC_DIR
 
 STATICFILES_DIRS = (
 	os.path.join(BASE_DIR, "static"),
+	'/home/Cybernetic1/coco/static',
 	MACHINA_MAIN_STATIC_DIR,
 )
 
