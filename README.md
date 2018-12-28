@@ -1,6 +1,6 @@
 ![logo](coco/static/logo.png)
 
-# Coco &mdash; decentralized, autonomous, anonymous, open-source, for-profit, collaborative platform based on virtual shares
+# Coco &mdash; decentralized, autonomous, open-source, for-profit, collaborative platform based on virtual shares
 
 The name Coco comes from "co-operative co-evolution", a kind of evolutionary algorithm.
 
@@ -10,9 +10,16 @@ The name Coco comes from "co-operative co-evolution", a kind of evolutionary alg
 
 Features
 --------
-* **Autonomous** &mdash; no boss, no management, no strict hierarchy.  Teams / clusters are formed according to needs.
+* **Autonomy** &mdash; no boss, no management, no strict hierarchy.  Teams / clusters are formed according to needs.
 
-* **Anonymous** &mdash; Members can only see contributions but not the identities of their originators.  Contributions are valued purely on their **intrinsic merits**.
+* **Anonymity** &mdash; Currently COCO allows projects to choose their own policies:
+  * _real-name_
+  * _anonymous_
+  * _mixed_
+
+  In **anonymous** mode, members can only see contributions but not the identities of their originators.  Contributions are valued purely on their _intrinsic merits_.
+
+  In **real-name** mode, the real-world _reputation_ of a contributor may help others to trust or distruct them.
 
 * Contributors get **shares** instead of one-time income.  Projects can sustain for a long time as old members leave and new members join.
 
