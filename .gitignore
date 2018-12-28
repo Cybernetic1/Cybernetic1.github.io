@@ -1,3 +1,16 @@
+__pycache__/
+
+.virtualenvs/
+.*/
+
+.*
+!.gitignore
+!.gitconfig
+
+/coco/static/*/
+!/coco/static/css/
+!/coco/static/fonts/
+
 /coco/machina-example/
 /coco/bin/
 /coco/markdown2-2.3.7.dist-info/
