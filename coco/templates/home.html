@@ -8,13 +8,14 @@
 {% if user.is_authenticated %}
 	<p>Hello, {{ user.username }}</p>
 
-<h1>COCO rules</h1>
+<h1>Welcome to COCO</h1>
 <hr>
 
-<ul>
-	<li>Contribs = short for contributions</li>
-	<li>"Rating" is synonymous with "voting"</li>
-</ul>
+<p>Many features in COCO are still under development.</p>
+
+<p>This forum can be used to discuss COCO issues for the time being.</p>
+
+<p>You can just add your comments anywhere you like.</p>
 
 	<p><a href="{% url 'forum:index' %}">Forum</a></p>
 
@@ -23,7 +24,9 @@
 
 {% else %}
 	<p>You are not logged in</p>
-	<a href="{% url 'login' %}">log-in</a>
-
+	
+	<a href="{% url 'login' %}">&lang;Log in&rang;</a>
+	<br>
+	<a href="{% url 'signup' %}">&lang;Sign up&rang;</a>
 {% endif %}
 {% endblock %}
