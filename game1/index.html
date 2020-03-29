@@ -76,7 +76,6 @@
 		<td id="pinyin4">xi</td>
 	  </tr>
 	</table> 
-	<br>
 	<p id="keybuff">keybuff</p>
 	<!-- h1>拼音游戏</h1 -->
 	<script type='text/javascript'>
@@ -92,10 +91,10 @@
 			song_idx += 1;
 			if (song_idx >= 5)
 				song_idx = 1;
-			audio.src = "sounds/background" + song_idx.toString() + ".mp3";
-			audio.pause();
-			audio.load();
-			audio.play();
+			music.src = "sounds/background" + song_idx.toString() + ".mp3";
+			music.pause();
+			music.load();
+			music.play();
     	});
 
 		// *********** Read words into word list
@@ -124,6 +123,7 @@
 
 		var player = {
 			color: "#0000AA",
+			answer: "",
 			// x: 50,
 			// y: 620,
 			// width: 20,
@@ -132,8 +132,7 @@
 			// canvas.fillStyle = this.color;
 			// canvas.fillRect(this.x, this.y, this.width, this.height);
 
-			k = document.getElementById("keybuff");
-			k.textContent = keybuff;
+			answer = keybuff;
 			}
 		};
 
