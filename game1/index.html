@@ -55,12 +55,12 @@
 	<body background="images/background.jpg">
 	<!-- iframe src="sounds/silence.mp3" allow="autoplay" id="audio" style="display: none"></iframe -->
 
-	<!-- audio autoplay="true" loop="true">
+	<audio id="music" autoplay="true" loop="true">
   		<source src="sounds/background1.mp3" type="audio/mpeg">
-		<source src="sounds/background2.mp3" type="audio/mpeg">
+		<!-- source src="sounds/background2.mp3" type="audio/mpeg">
 		<source src="sounds/background3.mp3" type="audio/mpeg">
-		<source src="sounds/background4.mp3" type="audio/mpeg">
-	</audio -->
+		<source src="sounds/background4.mp3" type="audio/mpeg" -->
+	</audio>
 
 	<table>
 	  <tr>
@@ -84,11 +84,12 @@
 		//var CANVAS_HEIGHT = 400;
 		var FPS = 30;
 
-		audio = new Audio("sounds/background1.mp3");
+		// audio = new Audio("sounds/background3.mp3");
 		var song_idx = 1;
 
-  		audio.addEventListener('ended',function(){
-			song_idx++;
+		var music = document.getElementById("music");
+ 		$("music").bind('ended',function(){
+			song_idx += 1;
 			if (song_idx >= 5)
 				song_idx = 1;
 			audio.src = "sounds/background" + song_idx.toString() + ".mp3";
