@@ -56,7 +56,7 @@
 	<!-- iframe src="sounds/silence.mp3" allow="autoplay" id="audio" style="display: none"></iframe -->
 
 	<audio id="music" autoplay="true" loop="true">
-  		<source src="sounds/background1.mp3" type="audio/mpeg">
+  		<source src="sounds/background2.mp3" type="audio/mpeg">
 		<!-- source src="sounds/background2.mp3" type="audio/mpeg">
 		<source src="sounds/background3.mp3" type="audio/mpeg">
 		<source src="sounds/background4.mp3" type="audio/mpeg" -->
@@ -83,7 +83,7 @@
 
 		var song_idx = 1;
 		var music = document.getElementById("music");
- 		$("#music").bind('ended',function(){
+ 		$("#music").bind('ended', function() {
 			song_idx += 1;
 			if (song_idx >= 5)
 				song_idx = 1;
@@ -162,17 +162,6 @@
 			I = I || {};
 
 			I.active = true;
-			// I.age = Math.floor(Math.random() * 128);
-
-			// I.color = "#AA22BB";
-			I.text = wordlist[Math.floor(Math.random() * num_words)];
-			I.pinyin = new Array();
-			I.question = new Array();
-			for (var i = 0, len = I.text.length; i < len; ++i) {
-				c = I.text[i];
-				I.pinyin[i] = pin[c][0] + pin[c][1];
-				I.question[i] = '_' + pin[c][1];
-			}
 
 			/***** If possible, speak Mandarin *****
 			$.ajax({
@@ -186,47 +175,11 @@
 			*/
 
 			I.draw = function() {
-			c1 = document.getElementById("char1");
-			c1.textContent = this.text[0];
+			ch = document.getElementById("char" + I.position.toString());
+			ch.textContent = this.ch;
 			
-			c2 = document.getElementById("char2");
-			if (this.text.length >= 2)
-				c2.textContent = this.text[1];
-			else
-				c2.textContent = "";
-
-			c3 = document.getElementById("char3");
-			if (this.text.length >= 3)
-				c3.textContent = this.text[2];
-			else
-				c3.textContent = "";
-
-			c4 = document.getElementById("char4");
-			if (this.text.length >= 4)
-				c4.textContent = this.text[3];
-			else
-				c4.textContent = "";
-
-			p1 = document.getElementById("pinyin1");
-			p1.textContent = this.question[0];
-			
-			p2 = document.getElementById("pinyin2");
-			if (this.question.length >= 2)
-				p2.textContent = this.question[1];
-			else
-				p2.textContent = "";
-
-			p3 = document.getElementById("pinyin3");
-			if (this.question.length >= 3)
-				p3.textContent = this.question[2];
-			else
-				p3.textContent = "";
-
-			p4 = document.getElementById("pinyin4");
-			if (this.question.length >= 4)
-				p4.textContent = this.question[3];
-			else
-				p4.textContent = "";
+			py = document.getElementById("pinyin" + I.position.toString());
+			py.textContent = this.question;
 			};
 
 			I.update = function() {
@@ -285,7 +238,20 @@
 
 			// if(Math.random() < 0.002) {
 			if (enemies.length == 0) {
-			enemies.push(Enemy());
+				var text = wordlist[Math.floor(Math.random() * num_words)];
+				I.pinyin = new Array();
+				I.question = new Array();
+				for (var i = 0, len = text.length; i < len; ++i) {
+					var ch = text[i];
+					var pinyin = pin[ch][0] + pin[ch][1];
+					var question = '_' + pin[ch][1];
+					enemies.push(Enemy({
+						position: i,
+						ch: ch,
+						pinyin: pinyin,
+						question: question
+					}));
+				}
 			}
 		}
 
@@ -302,9 +268,9 @@
 			var bulletPosition = this.midpoint();
 
 			playerBullets.push(Bullet({
-			speed: 5,
-			x: bulletPosition.x,
-			y: bulletPosition.y
+				speed: 5,
+				x: bulletPosition.x,
+				y: bulletPosition.y
 			}));
 		};
 
@@ -327,13 +293,13 @@
 			});
 		}
 
-		function collides(a) {
+		function collides(enemy) {
 			var match = true;
-			for (var i = 0, j = 0, len1 = a.pinyin.length, len2 = keybuff.length;
+			for (var i = 0, j = 0, len1 = enemy.pinyin.length, len2 = keybuff.length;
 					i < len1; ++i, ++j) {
 				if (j >= len2)
 					j = len2 - 1;
-				if (a.pinyin[i] == ' ') {
+				if (enemy.pinyin[i] == ' ') {
 					j -= 1;
 					continue;
 					}
@@ -341,7 +307,7 @@
 					i -= 1;
 					continue;
 					}
-				if (a.pinyin[i] != keybuff[j]) {
+				if (enemy.pinyin[i] != keybuff[j]) {
 					match = false;
 					break;
 					}
