@@ -16,8 +16,8 @@
 	<iframe src="sounds/silence.mp3" allow="autoplay" id="audio" style="display: none"></iframe>
 	
 	<audio autoplay="true" loop="true">
-  		<source src="sounds/background1.mp3" type="audio/mpeg">
-		<source src="sounds/background1.wav" type="audio/wav">
+  		<source src="sounds/background2.mp3" type="audio/mpeg">
+		<source src="sounds/background1.mp3" volume="0.6" type="audio/mpeg">
 	</audio>
 
 	<h1>YKY 拼音游戏</h1>
@@ -50,47 +50,6 @@
 				});
 			console.log("num_words = ", num_words);
 		  });
-
-		//$.ajax({
-		//	url: "chinese-words.txt",
-		//	async: false,
-		//	success: function(data)
-		//	{
-		//	}
-		//});
-
-		// var fs = require("fs");
-		// var data = fs.readFileSync("./chinese-words.txt");
-		// var lines = data.split("\n")
-
-		// lines.forEach(function(line) {
-		//	var words = line.split('\t');
-
-		//	words.forEach(function(w) {
-		//		if (w != "") {
-		//			wordlist[i] = w;
-		//			i += 1;
-		//		}
-		//	});
-		//});
-
-		/*
-		// jQuery.get('http://localhost:9090/chinese-words.1.txt', function(data) {
-		jQuery.get('http://localhost:8484/loadDatabase/chinese-words', function(data) {
-			var lines = data.split("\n");
-
-			lines.forEach(function(line) {
-				var words = line.split('\t');
-
-				words.forEach(function(w) {
-					if (w != "") {
-						wordlist[i] = w;
-						i += 1;
-					}
-				});
-			});
-		});
-		*/
 
 		var player = {
 			color: "#00A",
