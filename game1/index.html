@@ -56,7 +56,7 @@
 	<!-- iframe src="sounds/silence.mp3" allow="autoplay" id="audio" style="display: none"></iframe -->
 
 	<audio id="music" autoplay="true">
-  		<source src="sounds/background2.mp3" type="audio/mpeg">
+  		<source src="sounds/background3.mp3" type="audio/mpeg">
 		<!-- source src="sounds/background2.mp3" type="audio/mpeg">
 		<source src="sounds/background3.mp3" type="audio/mpeg">
 		<source src="sounds/background4.mp3" type="audio/mpeg" -->
@@ -66,22 +66,22 @@
 
 	<table>
 	  <tr>
-		<th id="char1">拼</th>
-		<th id="char2">音</th>
-		<th id="char3">游</th>
-		<th id="char4">戏</th>
+		<th id="char0">拼</th>
+		<th id="char1">音</th>
+		<th id="char2">游</th>
+		<th id="char3">戏</th>
 	  </tr>
 	  <tr>
-		<td id="pinyin1">pin</td>
-		<td id="pinyin2">yin</td>
-		<td id="pinyin3">you</td>
-		<td id="pinyin4">xi</td>
+		<td id="pinyin0">pin</td>
+		<td id="pinyin1">yin</td>
+		<td id="pinyin2">you</td>
+		<td id="pinyin3">xi</td>
 	  </tr>
 	</table> 
 	<script type='text/javascript'>
 		var FPS = 30;
 
-		var song_idx = 1;
+		var song_idx = 3;
 		var music = document.getElementById("music");
  		$("#music").bind('ended', function() {
 			song_idx += 1;
@@ -239,16 +239,22 @@
 			// if(Math.random() < 0.002) {
 			if (enemies.length == 0) {
 				var text = wordlist[Math.floor(Math.random() * num_words)];
-				for (var i = 0, len = text.length; i < len; ++i) {
-					var ch = text[i];
+				var pos = 0;
+				for (var len = text.length; pos < len; ++pos) {
+					var ch = text[pos];
 					var pinyin = pin[ch][0] + pin[ch][1];
 					var question = '_' + pin[ch][1];
 					enemies.push(Enemy({
-						position: i + 1,
+						position: pos,
 						ch: ch,
 						pinyin: pinyin,
 						question: question
 					}));
+				}
+				// Fill empty spaces
+				for (; pos < 5; ++pos) {
+					ch = document.getElementById("char" + I.pos.toString());
+					ch.textContent = "";
 				}
 			}
 		}
