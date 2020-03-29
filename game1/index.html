@@ -5,12 +5,38 @@
 	<head>
 	<title>YKY pinyin game</title>
 	<link href="stylesheets/screen.css" media="all" rel="stylesheet" type="text/css"/>
+
 	<script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript"></script>
 	<script language="javascript" src="javascripts/jquery.hotkeys.js" type="text/javascript"></script>
 	<script language="javascript" src="javascripts/key_status.js" type="text/javascript"></script>
 	<script language="javascript" src="javascripts/util.js" type="text/javascript"></script>
 	<!-- script language="javascript" src="javascripts/sprite.js" type="text/javascript"></script-->
 	<script language="javascript" src="javascripts/sound.js" type="text/javascript"></script>
+
+	<style>
+	.button {
+		border: #000000;
+		border-width: 5px;
+		border-style: solid;
+		border-radius: 30px;
+		color: white;
+		padding: 5px;
+		text-align: center;
+		font-size: 50px;
+		width: 160px;
+		height: 100px;
+		cursor: pointer;
+		margin-bottom: 10px;
+	}
+
+	.b1 { background-color: #FF0033; }
+	.b2 { background-color: #5555FF; }
+	.b3 { background-color: #FF9944; }
+
+	.button:hover {
+		background-color: black;
+	}
+	</style>
 	</head>
 	<body>
 	<iframe src="sounds/silence.mp3" allow="autoplay" id="audio" style="display: none"></iframe>
@@ -20,11 +46,10 @@
 		<source src="sounds/background1.mp3" volume="0.6" type="audio/mpeg">
 	</audio>
 
-	<h1>YKY 拼音游戏</h1>
-	<p id="answer">Answer</p>
+	<h2>拼音游戏</h2>
 	<script type='text/javascript'>
-		var CANVAS_WIDTH = 900;
-		var CANVAS_HEIGHT = 640;
+		var CANVAS_WIDTH = 600;
+		var CANVAS_HEIGHT = 500;
 		var FPS = 30;
 
 		// *********** Read words into word list
@@ -129,8 +154,9 @@
 			});
 			*/
 
-			I.x = CANVAS_WIDTH / 4 + Math.random() * CANVAS_WIDTH / 2;
-			I.y = CANVAS_HEIGHT / 4 + Math.random() * CANVAS_HEIGHT / 2;
+			// I.x = CANVAS_WIDTH / 4 + Math.random() * CANVAS_WIDTH / 2;
+			// I.y = CANVAS_HEIGHT / 4 + Math.random() * CANVAS_HEIGHT / 2;
+			I.x = 5; I.y = 200;
 			I.xVelocity = 0; // Math.random() * 8.0 - 4.0;
 			I.yVelocity = 0; // Math.random() * 4.0;
 
@@ -145,11 +171,13 @@
 			// I.sprite = Sprite("enemy");
 
 			I.draw = function() {
-			canvas.fillStyle = "#A2B";
+			canvas.fillStyle = "#AA22BB";
+			canvas.font = "180px AR PL UKai HK";
 			// canvas.fillRect(this.x, this.y, this.width, this.height);
 			canvas.fillText(this.text, this.x, this.y);
-			canvas.fillStyle = "#290";
-			canvas.fillText(this.question, this.x, this.y + 20);
+			canvas.fillStyle = "#229900";
+			canvas.font = "50px Verdana";
+			canvas.fillText(this.question, this.x, this.y + 100);
 			// this.sprite.draw(canvas, this.x, this.y);
 			};
 
@@ -188,8 +216,10 @@
 			"' height='" + CANVAS_HEIGHT + "'></canvas");
 		var canvas = canvasElement.get(0).getContext("2d");
 		canvasElement.appendTo('body');
-		canvas.font = "25px AR PL UKai HK";
+		canvas.font = "90px AR PL UKai HK";
 		// Sound.play("background1");
+
+		
 
 		setInterval(function() {
 			update();
@@ -10244,5 +10274,32 @@ pin['鲖'] = ['t','ong',2];
 pin['鴒'] = ['l','ing',2];
 
 	</script>
+	<br>
+	<button class="button b1">b</button>
+	<button class="button b1">p</button>
+	<button class="button b1">m</button>
+	<button class="button b1">f</button>
+	<br>
+	<button class="button b1">d</button>
+	<button class="button b1">t</button>
+	<button class="button b1">n</button>
+	<br>
+	<button class="button b1">g</button>
+	<button class="button b1">k</button>
+	<button class="button b3">r</button>
+	<br>
+	<button class="button b2">j</button>
+	<button class="button b2">q</button>
+	<button class="button b2">x</button>
+	<br>
+	<button class="button b2">zh</button>
+	<button class="button b2">ch</button>
+	<button class="button b2">sh</button>
+	<br>
+	<button class="button b2">z</button>
+	<button class="button b2">c</button>
+	<button class="button b2">s</button>
+	<br>
+	<p id="answer">Answer</p>
 	</body>
 </html>
