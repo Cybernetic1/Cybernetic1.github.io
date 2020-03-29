@@ -38,18 +38,20 @@
 	}
 	</style>
 	</head>
-	<body>
+	<body background="images/background.jpg">
 	<iframe src="sounds/silence.mp3" allow="autoplay" id="audio" style="display: none"></iframe>
 	
-	<audio autoplay="true" loop="true">
-  		<source src="sounds/background2.mp3" type="audio/mpeg">
-		<source src="sounds/background1.mp3" volume="0.6" type="audio/mpeg">
+	<audio autoplay="true">
+  		<source src="sounds/background3.mp3" type="audio/mpeg">
+		<source src="sounds/background2.mp3" volume="0.6" type="audio/mpeg">
+		<source src="sounds/background1.mp3" type="audio/mpeg">
+		<source src="sounds/background4.mp3" type="audio/mpeg">
 	</audio>
 
-	<h2>拼音游戏</h2>
+	<!-- h1>拼音游戏</h1 -->
 	<script type='text/javascript'>
-		var CANVAS_WIDTH = 600;
-		var CANVAS_HEIGHT = 500;
+		var CANVAS_WIDTH = 800;
+		var CANVAS_HEIGHT = 400;
 		var FPS = 30;
 
 		// *********** Read words into word list
@@ -171,11 +173,11 @@
 			// I.sprite = Sprite("enemy");
 
 			I.draw = function() {
-			canvas.fillStyle = "#AA22BB";
+			canvas.fillStyle = "#CC44DD";
 			canvas.font = "180px AR PL UKai HK";
 			// canvas.fillRect(this.x, this.y, this.width, this.height);
 			canvas.fillText(this.text, this.x, this.y);
-			canvas.fillStyle = "#229900";
+			canvas.fillStyle = "#44BB22";
 			canvas.font = "50px Verdana";
 			canvas.fillText(this.question, this.x, this.y + 100);
 			// this.sprite.draw(canvas, this.x, this.y);
