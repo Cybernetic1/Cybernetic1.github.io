@@ -36,18 +36,47 @@
 	.button:hover {
 		background-color: black;
 	}
+
+	th {
+		font-family: "AR PL UKai HK";
+		font-size: 180px;
+		color: #CC44DD;
+	}
+
+	td {
+		font-family: "Verdana";
+		font-size: 50px;
+		color: #44BB22;
+		text-align: center;
+	}
 	</style>
 	</head>
 	<body background="images/background.jpg">
 	<iframe src="sounds/silence.mp3" allow="autoplay" id="audio" style="display: none"></iframe>
-	
-	<audio autoplay="true">
+
+	<audio autoplay="true" loop="true">
   		<source src="sounds/background3.mp3" type="audio/mpeg">
-		<source src="sounds/background2.mp3" volume="0.6" type="audio/mpeg">
+		<source src="sounds/background2.mp3" type="audio/mpeg">
 		<source src="sounds/background1.mp3" type="audio/mpeg">
 		<source src="sounds/background4.mp3" type="audio/mpeg">
 	</audio>
 
+	<table>
+	  <tr>
+		<th id="char1">拼</th>
+		<th id="char2">音</th>
+		<th id="char3">游</th>
+		<th id="char4">戏</th>
+	  </tr>
+	  <tr>
+		<td id="pinyin1">pin</td>
+		<td id="pinyin2">yin</td>
+		<td id="pinyin3">you</td>
+		<td id="pinyin4">xi</td>
+	  </tr>
+	</table> 
+	<br>
+	<p id="keybuff">keybuff</p>
 	<!-- h1>拼音游戏</h1 -->
 	<script type='text/javascript'>
 		var CANVAS_WIDTH = 800;
@@ -79,15 +108,17 @@
 		  });
 
 		var player = {
-			color: "#00A",
-			x: 50,
-			y: 620,
-			width: 20,
-			height: 30,
+			color: "#0000AA",
+			// x: 50,
+			// y: 620,
+			// width: 20,
+			// height: 30,
 			draw: function() {
-			canvas.fillStyle = this.color;
+			// canvas.fillStyle = this.color;
 			// canvas.fillRect(this.x, this.y, this.width, this.height);
-			canvas.fillText(keybuff, this.x, this.y);
+
+			k = document.getElementById("keybuff");
+			k.textContent = keybuff;
 			}
 		};
 
@@ -96,11 +127,11 @@
 		function Bullet(I) {
 			I.active = true;
 
-			I.xVelocity = 0;
-			I.yVelocity = -I.speed;
-			I.width = 3;
-			I.height = 3;
-			I.color = "#000";
+			//I.xVelocity = 0;
+			//I.yVelocity = -I.speed;
+			//I.width = 3;
+			//I.height = 3;
+			I.color = "#000000";
 
 			I.inBounds = function() {
 			return I.x >= 0 && I.x <= CANVAS_WIDTH &&
@@ -108,8 +139,8 @@
 			};
 
 			I.draw = function() {
-			canvas.fillStyle = this.color;
-			canvas.fillRect(this.x, this.y, this.width, this.height);
+			// canvas.fillStyle = this.color;
+			// canvas.fillRect(this.x, this.y, this.width, this.height);
 			};
 
 			I.update = function() {
@@ -137,12 +168,12 @@
 
 			// I.color = "#A2B";
 			I.text = wordlist[Math.floor(Math.random() * num_words)];
-			I.pinyin = "";
-			I.question = "";
+			I.pinyin = new Array();
+			I.question = new Array();
 			for (var i = 0, len = I.text.length; i < len; ++i) {
 				c = I.text[i];
-				I.pinyin += (pin[c][0] + pin[c][1] + ' ');
-				I.question += ('_' + pin[c][1] + ' ');
+				I.pinyin[i] = pin[c][0] + pin[c][1];
+				I.question[i] = '_' + pin[c][1];
 			}
 
 			/*
@@ -158,50 +189,86 @@
 
 			// I.x = CANVAS_WIDTH / 4 + Math.random() * CANVAS_WIDTH / 2;
 			// I.y = CANVAS_HEIGHT / 4 + Math.random() * CANVAS_HEIGHT / 2;
-			I.x = 5; I.y = 200;
-			I.xVelocity = 0; // Math.random() * 8.0 - 4.0;
-			I.yVelocity = 0; // Math.random() * 4.0;
+			// I.x = 5; I.y = 200;
+			// I.xVelocity = 0; // Math.random() * 8.0 - 4.0;
+			// I.yVelocity = 0; // Math.random() * 4.0;
 
-			I.width = 32;
-			I.height = 32;
+			// I.width = 32;
+			// I.height = 32;
 
-			I.inBounds = function() {
-			return I.x >= 0 && I.x <= CANVAS_WIDTH &&
-				I.y >= 0 && I.y <= CANVAS_HEIGHT;
-			};
+			// I.inBounds = function() {
+			// return I.x >= 0 && I.x <= CANVAS_WIDTH &&
+			//	I.y >= 0 && I.y <= CANVAS_HEIGHT;
+			// };
 
 			// I.sprite = Sprite("enemy");
 
 			I.draw = function() {
-			canvas.fillStyle = "#CC44DD";
-			canvas.font = "180px AR PL UKai HK";
+			// canvas.fillStyle = "#CC44DD";
+			// canvas.font = "180px AR PL UKai HK";
 			// canvas.fillRect(this.x, this.y, this.width, this.height);
-			canvas.fillText(this.text, this.x, this.y);
-			canvas.fillStyle = "#44BB22";
-			canvas.font = "50px Verdana";
-			canvas.fillText(this.question, this.x, this.y + 100);
-			// this.sprite.draw(canvas, this.x, this.y);
+			c1 = document.getElementById("char1");
+			c1.textContent = this.text[0];
+			
+			c2 = document.getElementById("char2");
+			if (this.text.length >= 2)
+				c2.textContent = this.text[1];
+			else
+				c2.textContent = "";
+
+			c3 = document.getElementById("char3");
+			if (this.text.length >= 3)
+				c3.textContent = this.text[2];
+			else
+				c3.textContent = "";
+
+			c4 = document.getElementById("char4");
+			if (this.text.length >= 4)
+				c4.textContent = this.text[3];
+			else
+				c4.textContent = "";
+
+			p1 = document.getElementById("pinyin1");
+			p1.textContent = this.question[0];
+			
+			p2 = document.getElementById("pinyin2");
+			if (this.question.length >= 2)
+				p2.textContent = this.question[1];
+			else
+				p2.textContent = "";
+
+			p3 = document.getElementById("pinyin3");
+			if (this.question.length >= 3)
+				p3.textContent = this.question[2];
+			else
+				p3.textContent = "";
+
+			p4 = document.getElementById("pinyin4");
+			if (this.question.length >= 4)
+				p4.textContent = this.question[3];
+			else
+				p4.textContent = "";
 			};
 
 			I.update = function() {
-			I.x = Math.floor(I.x + I.xVelocity);
-			I.y = Math.floor(I.y + I.yVelocity);
+			//I.x = Math.floor(I.x + I.xVelocity);
+			//I.y = Math.floor(I.y + I.yVelocity);
 
-			if (I.x > CANVAS_WIDTH)
-				I.x = 0;
-			if (I.x < 0)
-				I.x = CANVAS_WIDTH;
-			if (I.y > CANVAS_HEIGHT)
-				I.y = 0;
-			if (I.y < 0)
-				I.y = CANVAS_HEIGHT;
+			//if (I.x > CANVAS_WIDTH)
+			//	I.x = 0;
+			//if (I.x < 0)
+			//	I.x = CANVAS_WIDTH;
+			//if (I.y > CANVAS_HEIGHT)
+			//	I.y = 0;
+			//if (I.y < 0)
+			//	I.y = CANVAS_HEIGHT;
 
 			// I.xVelocity = 3 * Math.sin(I.age * Math.PI / 64);
 			// I.yVelocity = 3 * Math.sin(I.age * Math.PI / 64);
 
-			I.age++;
+			// I.age++;
 
-			I.active = I.active && I.inBounds();
+			// I.active = I.active && I.inBounds();
 			};
 
 			I.explode = function(sound) {
@@ -214,14 +281,12 @@
 			return I;
 		};
 
-		var canvasElement = $("<canvas width='" + CANVAS_WIDTH +
-			"' height='" + CANVAS_HEIGHT + "'></canvas");
-		var canvas = canvasElement.get(0).getContext("2d");
-		canvasElement.appendTo('body');
-		canvas.font = "90px AR PL UKai HK";
+		// var canvasElement = $("<canvas width='" + CANVAS_WIDTH +
+		//	"' height='" + CANVAS_HEIGHT + "'></canvas");
+		// var canvas = canvasElement.get(0).getContext("2d");
+		// canvasElement.appendTo('body');
+		// canvas.font = "90px AR PL UKai HK";
 		// Sound.play("background1");
-
-		
 
 		setInterval(function() {
 			update();
@@ -238,14 +303,14 @@
 			}
 
 			if(keydown.left) {
-			player.x -= 5;
+			// player.x -= 5;
 			}
 
 			if(keydown.right) {
-			player.x += 5;
+			// player.x += 5;
 			}
 
-			player.x = player.x.clamp(0, CANVAS_WIDTH - player.width);
+			// player.x = player.x.clamp(0, CANVAS_WIDTH - player.width);
 
 			playerBullets.forEach(function(bullet) {
 			bullet.update();
@@ -297,7 +362,7 @@
 		};
 
 		function draw() {
-			canvas.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+			// canvas.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 			player.draw();
 
 			playerBullets.forEach(function(bullet) {
