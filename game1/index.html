@@ -55,7 +55,7 @@
 	<body background="images/background.jpg">
 	<!-- iframe src="sounds/silence.mp3" allow="autoplay" id="audio" style="display: none"></iframe -->
 
-	<audio id="music" autoplay="true" loop="true">
+	<audio id="music" autoplay="true">
   		<source src="sounds/background2.mp3" type="audio/mpeg">
 		<!-- source src="sounds/background2.mp3" type="audio/mpeg">
 		<source src="sounds/background3.mp3" type="audio/mpeg">
@@ -239,8 +239,6 @@
 			// if(Math.random() < 0.002) {
 			if (enemies.length == 0) {
 				var text = wordlist[Math.floor(Math.random() * num_words)];
-				I.pinyin = new Array();
-				I.question = new Array();
 				for (var i = 0, len = text.length; i < len; ++i) {
 					var ch = text[i];
 					var pinyin = pin[ch][0] + pin[ch][1];
