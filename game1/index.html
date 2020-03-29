@@ -24,20 +24,40 @@
 		var wordlist = new Array();
 		var i = 0;
 
-		var fs = require("fs");
-		var data = fs.readFileSync("./chinese-words.txt");
-		var lines = data.split("\n")
+		$.ajax({
+			url: "chinese-words.txt",
+			async: false,
+			success: function(data)
+			{
+				var lines = data.split("\n")
 
-		lines.forEach(function(line) {
-			var words = line.split('\t');
+				lines.forEach(function(line) {
+					var words = line.split('\t');
 
-			words.forEach(function(w) {
-				if (w != "") {
-					wordlist[i] = w;
-					i += 1;
-				}
-			});
+					words.forEach(function(w) {
+						if (w != "") {
+							wordlist[i] = w;
+							i += 1;
+						}
+					});
+				});
+			}
 		});
+
+		// var fs = require("fs");
+		// var data = fs.readFileSync("./chinese-words.txt");
+		// var lines = data.split("\n")
+
+		// lines.forEach(function(line) {
+		//	var words = line.split('\t');
+
+		//	words.forEach(function(w) {
+		//		if (w != "") {
+		//			wordlist[i] = w;
+		//			i += 1;
+		//		}
+		//	});
+		//});
 
 		/*
 		// jQuery.get('http://localhost:9090/chinese-words.1.txt', function(data) {
