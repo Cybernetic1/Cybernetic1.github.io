@@ -76,18 +76,12 @@
 		<td id="pinyin4">xi</td>
 	  </tr>
 	</table> 
-	<p id="keybuff">keybuff</p>
-	<!-- h1>拼音游戏</h1 -->
 	<script type='text/javascript'>
-		//var CANVAS_WIDTH = 800;
-		//var CANVAS_HEIGHT = 400;
 		var FPS = 30;
 
-		// audio = new Audio("sounds/background3.mp3");
 		var song_idx = 1;
-
 		var music = document.getElementById("music");
- 		$("music").bind('ended',function(){
+ 		$("#music").bind('ended',function(){
 			song_idx += 1;
 			if (song_idx >= 5)
 				song_idx = 1;
@@ -124,14 +118,8 @@
 		var player = {
 			color: "#0000AA",
 			answer: "",
-			// x: 50,
-			// y: 620,
-			// width: 20,
-			// height: 30,
-			draw: function() {
-			// canvas.fillStyle = this.color;
-			// canvas.fillRect(this.x, this.y, this.width, this.height);
 
+			draw: function() {
 			answer = keybuff;
 			}
 		};
@@ -141,10 +129,6 @@
 		function Bullet(I) {
 			I.active = true;
 
-			//I.xVelocity = 0;
-			//I.yVelocity = -I.speed;
-			//I.width = 3;
-			//I.height = 3;
 			I.color = "#000000";
 
 			I.inBounds = function() {
@@ -153,15 +137,13 @@
 			};
 
 			I.draw = function() {
-			// canvas.fillStyle = this.color;
-			// canvas.fillRect(this.x, this.y, this.width, this.height);
 			};
 
 			I.update = function() {
-			I.x += I.xVelocity;
-			I.y += I.yVelocity;
+			// I.x += I.xVelocity;
+			// I.y += I.yVelocity;
 
-			I.active = I.active && I.inBounds();
+			// I.active = I.active && I.inBounds();
 			};
 
 			I.explode = function() {
@@ -178,9 +160,9 @@
 			I = I || {};
 
 			I.active = true;
-			I.age = Math.floor(Math.random() * 128);
+			// I.age = Math.floor(Math.random() * 128);
 
-			// I.color = "#A2B";
+			// I.color = "#AA22BB";
 			I.text = wordlist[Math.floor(Math.random() * num_words)];
 			I.pinyin = new Array();
 			I.question = new Array();
@@ -190,7 +172,7 @@
 				I.question[i] = '_' + pin[c][1];
 			}
 
-			/*
+			/***** If possible, speak Mandarin *****
 			$.ajax({
 				method: "POST",
 				url: "http://localhost:9090/speakMandarin/",
@@ -201,26 +183,7 @@
 			});
 			*/
 
-			// I.x = CANVAS_WIDTH / 4 + Math.random() * CANVAS_WIDTH / 2;
-			// I.y = CANVAS_HEIGHT / 4 + Math.random() * CANVAS_HEIGHT / 2;
-			// I.x = 5; I.y = 200;
-			// I.xVelocity = 0; // Math.random() * 8.0 - 4.0;
-			// I.yVelocity = 0; // Math.random() * 4.0;
-
-			// I.width = 32;
-			// I.height = 32;
-
-			// I.inBounds = function() {
-			// return I.x >= 0 && I.x <= CANVAS_WIDTH &&
-			//	I.y >= 0 && I.y <= CANVAS_HEIGHT;
-			// };
-
-			// I.sprite = Sprite("enemy");
-
 			I.draw = function() {
-			// canvas.fillStyle = "#CC44DD";
-			// canvas.font = "180px AR PL UKai HK";
-			// canvas.fillRect(this.x, this.y, this.width, this.height);
 			c1 = document.getElementById("char1");
 			c1.textContent = this.text[0];
 			
@@ -265,24 +228,7 @@
 			};
 
 			I.update = function() {
-			//I.x = Math.floor(I.x + I.xVelocity);
-			//I.y = Math.floor(I.y + I.yVelocity);
-
-			//if (I.x > CANVAS_WIDTH)
-			//	I.x = 0;
-			//if (I.x < 0)
-			//	I.x = CANVAS_WIDTH;
-			//if (I.y > CANVAS_HEIGHT)
-			//	I.y = 0;
-			//if (I.y < 0)
-			//	I.y = CANVAS_HEIGHT;
-
-			// I.xVelocity = 3 * Math.sin(I.age * Math.PI / 64);
-			// I.yVelocity = 3 * Math.sin(I.age * Math.PI / 64);
-
-			// I.age++;
-
-			// I.active = I.active && I.inBounds();
+				// I.active = I.active && I.inBounds();
 			};
 
 			I.explode = function(sound) {
@@ -294,13 +240,6 @@
 
 			return I;
 		};
-
-		// var canvasElement = $("<canvas width='" + CANVAS_WIDTH +
-		//	"' height='" + CANVAS_HEIGHT + "'></canvas");
-		// var canvas = canvasElement.get(0).getContext("2d");
-		// canvasElement.appendTo('body');
-		// canvas.font = "90px AR PL UKai HK";
-		// Sound.play("background1");
 
 		setInterval(function() {
 			update();
@@ -323,8 +262,6 @@
 			if(keydown.right) {
 			// player.x += 5;
 			}
-
-			// player.x = player.x.clamp(0, CANVAS_WIDTH - player.width);
 
 			playerBullets.forEach(function(bullet) {
 			bullet.update();
@@ -351,9 +288,10 @@
 		}
 
 		player.shoot = function() {
+			// This causes true answer to be displayed
+			Sound.play("shoot");
 			ans = document.getElementById("answer");
 			ans.textContent = enemies[0].pinyin;
-			Sound.play("shoot");
 		};
 
 		player.shoot_Old = function() {
@@ -376,7 +314,6 @@
 		};
 
 		function draw() {
-			// canvas.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 			player.draw();
 
 			playerBullets.forEach(function(bullet) {
@@ -10381,6 +10318,6 @@ pin['鴒'] = ['l','ing',2];
 	<button class="button b2">c</button>
 	<button class="button b2">s</button>
 	<br>
-	<p id="answer">Answer</p>
+	&nbsp; &nbsp; <p id="answer">Answer</p>
 	</body>
 </html>
