@@ -20,6 +20,7 @@
 		border-style: solid;
 		border-radius: 50px;
 		color: white;
+		background-color: #275D80;
 		padding: 3px;
 		text-align: center;
 		font-size: 40px;
@@ -72,7 +73,7 @@
 		<source src="sounds/background4.mp3" type="audio/mpeg" -->
 	</audio>
 
-	<p id="answer" style="margin-left: 50px;">_</p>
+	<p style="margin-left: 50px;">&nbsp;</p>
 
 	<table id="board">
 	  <tr>
@@ -97,6 +98,8 @@
 		m</button>
 	<button class="button b1" onclick="butt('f')">
 		f</button>
+	<button class="button" onclick="player.shoot()" id="answer">
+		?</button>
 	<br>
 	<button class="button b1" onclick="butt('d')">
 		d</button>
@@ -268,7 +271,7 @@
 		I.explode = function() {
 			Sound.play("explosion");
 			ans = document.getElementById("answer");
-			ans.textContent = "_";
+			ans.textContent = "?";
 			// console.log("this.position = ", this.position);
 			var py = document.getElementById("pinyin" + this.position.toString());
 			py.textContent = this.answer + this.question.slice(1);
@@ -380,7 +383,12 @@
 		if (enemy.position != currentActive)
 			return false;
 
-		var match = true;
+		if (keybuff == enemy.answer)
+			return true;
+		else
+			return false;
+
+		/* var match = true;
 		for (var i = 0, j = 0, len1 = enemy.answer.length, len2 = keybuff.length;
 				i < len1; ++i, ++j) {
 			if (j >= len2)
@@ -391,6 +399,7 @@
 				}
 			}
 		return match;
+		*/
 		}
 
 	function handleCollisions() {
@@ -797,7 +806,7 @@ pin['未'] = ['w','ei',4];
 pin['远'] = ['y','uan',3];
 pin['叫'] = ['j','iao',4];
 pin['台'] = ['t','ai',2];
-pin['单'] = ['ch','an',2];
+pin['单'] = ['d','an',1];
 pin['影'] = ['y','ing',3];
 pin['具'] = ['j','u',4];
 pin['罗'] = ['l','uo',1];
