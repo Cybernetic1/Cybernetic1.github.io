@@ -253,8 +253,10 @@
 				}
 				// Fill empty spaces
 				for (; pos < 5; ++pos) {
-					ch = document.getElementById("char" + pos.toString());
+					var ch = document.getElementById("char" + pos.toString());
 					ch.textContent = "";
+					var py = document.getElementById("pinyin" + pos.toString());
+					py.textContent = "";
 				}
 			}
 		}
@@ -286,7 +288,7 @@
 					i < len1; ++i, ++j) {
 				if (j >= len2)
 					j = len2 - 1;
-				if (enemy.pinyin[i] != keybuff[j]) {
+				if (enemy.answer[i] != keybuff[j]) {
 					match = false;
 					break;
 					}
