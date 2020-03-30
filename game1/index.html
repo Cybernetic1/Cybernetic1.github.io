@@ -85,7 +85,7 @@
 		var music = document.getElementById("music");
  		$("#music").bind('ended', function() {
 			song_idx += 1;
-			if (song_idx >= 5)
+			if (song_idx >= 6)
 				song_idx = 1;
 			music.src = "sounds/background" + song_idx.toString() + ".mp3";
 			music.pause();
@@ -203,57 +203,57 @@
 
 		function update() {
 			if(keydown.esc) {
-			keybuff = "";
+				keybuff = "";
 			}
 
 			if(keydown.space) {
-			player.shoot();
+				player.shoot();
 			}
 
 			if(keydown.left) {
-			// player.x -= 5;
+			//	player.x -= 5;
 			}
 
 			if(keydown.right) {
-			// player.x += 5;
+			//	player.x += 5;
 			}
 
 			playerBullets.forEach(function(bullet) {
-			bullet.update();
+				bullet.update();
 			});
 
 			playerBullets = playerBullets.filter(function(bullet) {
-			return bullet.active;
+				return bullet.active;
 			});
 
 			enemies.forEach(function(enemy) {
-			enemy.update();
+				enemy.update();
 			});
 
 			enemies = enemies.filter(function(enemy) {
-			return enemy.active;
+				return enemy.active;
 			});
 
 			handleCollisions();
 
-			// if(Math.random() < 0.002) {
+			// Add new enemies:
 			if (enemies.length == 0) {
 				var text = wordlist[Math.floor(Math.random() * num_words)];
 				var pos = 0;
 				for (var len = text.length; pos < len; ++pos) {
 					var ch = text[pos];
-					var pinyin = pin[ch][0] + pin[ch][1];
+					var answer = pin[ch][0];
 					var question = '_' + pin[ch][1];
 					enemies.push(Enemy({
 						position: pos,
 						ch: ch,
-						pinyin: pinyin,
+						answer: answer,
 						question: question
 					}));
 				}
 				// Fill empty spaces
 				for (; pos < 5; ++pos) {
-					ch = document.getElementById("char" + I.pos.toString());
+					ch = document.getElementById("char" + pos.toString());
 					ch.textContent = "";
 				}
 			}
@@ -264,25 +264,7 @@
 			Sound.play("shoot");
 			ans = document.getElementById("answer");
 			ans.textContent = enemies[0].pinyin;
-		};
-
-		player.shoot_Old = function() {
-			Sound.play("shoot");
-
-			var bulletPosition = this.midpoint();
-
-			playerBullets.push(Bullet({
-				speed: 5,
-				x: bulletPosition.x,
-				y: bulletPosition.y
-			}));
-		};
-
-		player.midpoint = function() {
-			return {
-			x: this.x + this.width/2,
-			y: this.y + this.height/2
-			};
+			keybuff = "";
 		};
 
 		function draw() {
@@ -298,19 +280,12 @@
 		}
 
 		function collides(enemy) {
+			// New rule:  need only check consonant
 			var match = true;
-			for (var i = 0, j = 0, len1 = enemy.pinyin.length, len2 = keybuff.length;
+			for (var i = 0, j = 0, len1 = enemy.answer.length, len2 = keybuff.length;
 					i < len1; ++i, ++j) {
 				if (j >= len2)
 					j = len2 - 1;
-				if (enemy.pinyin[i] == ' ') {
-					j -= 1;
-					continue;
-					}
-				if (keybuff[j] == ' ') {
-					i -= 1;
-					continue;
-					}
 				if (enemy.pinyin[i] != keybuff[j]) {
 					match = false;
 					break;
@@ -328,36 +303,12 @@
 			});
 		}
 
-		function handleCollisions_Old() {
-			playerBullets.forEach(function(bullet) {
-			enemies.forEach(function(enemy) {
-				if(collides(bullet, enemy)) {
-				enemy.explode(true);
-				bullet.active = false;
-				}
-			});
-			});
-
-			enemies.forEach(function(enemy) {
-			if(collides(enemy, player)) {
-				enemy.explode(false);
-				player.explode();
-			}
-			});
-		}
-
 		player.explode = function() {
 			Sound.play("explosion-self");
 			this.active = false;
 			// Extra Credit: Add an explosion graphic and then end the game
 		};
 
-		// player.sprite = Sprite("player");
-
-		// player.draw = function() {
-			// this.sprite.draw(canvas, this.x, this.y);
-		// };
-		
 var pin = new Object();
 pin['的'] = ['d','e',0];
 pin['一'] = ['y','i',1];
