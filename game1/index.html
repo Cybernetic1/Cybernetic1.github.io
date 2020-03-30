@@ -58,7 +58,7 @@
 	td {
 		font-family: "Verdana";
 		font-size: 50px;
-		color: #44CC22;
+		color: #00FFEE;
 		text-align: center;
 	}
 	</style>
@@ -288,6 +288,46 @@
 		draw();
 	}, 1000/FPS);
 
+	function display_pinyin(nucleus, tone) {
+		// var nucleus = pinyins[1];
+		// var tone = pinyins[2];
+		var str2 = "";
+		var n0 = '!';
+
+		if (tone == 1) {
+			if (nucleus[0] == 'a') n0 = 'ā';
+			if (nucleus[0] == 'e') n0 = 'ē';
+			if (nucleus[0] == 'i') n0 = 'ī';
+			if (nucleus[0] == 'o') n0 = 'ō';
+			if (nucleus[0] == 'u') n0 = 'ū';
+		}
+		else if (tone == 2) {
+			if (nucleus[0] == 'a') n0 = 'á';
+			if (nucleus[0] == 'e') n0 = 'é';
+			if (nucleus[0] == 'i') n0 = 'í';
+			if (nucleus[0] == 'o') n0 = 'ó';
+			if (nucleus[0] == 'u') n0 = 'ú';
+		}
+		else if (tone == 3) {
+			if (nucleus[0] == 'a') n0 = 'ă';
+			if (nucleus[0] == 'e') n0 = 'ě';
+			if (nucleus[0] == 'i') n0 = 'ĭ';
+			if (nucleus[0] == 'o') n0 = 'ŏ';
+			if (nucleus[0] == 'u') n0 = 'ŭ';
+		}
+		else if (tone == 4) {
+			if (nucleus[0] == 'a') n0 = 'à';
+			if (nucleus[0] == 'e') n0 = 'è';
+			if (nucleus[0] == 'i') n0 = 'ì';
+			if (nucleus[0] == 'o') n0 = 'ò';
+			if (nucleus[0] == 'u') n0 = 'ù';
+		}
+		if (n0 == '!')
+			return nucleus;  	// tone.toString()
+		else
+			return n0 + nucleus.substr(1);
+	}
+
 	function update() {
 		if(keydown.esc) {
 			// clear key buffer
@@ -340,7 +380,7 @@
 				var answer = pin[ch][0];
 				if (answer == '')		// if no consonent, require an empty ' '
 					answer = ' ';
-				var question = '_' + pin[ch][1];
+				var question = '_' + display_pinyin(pin[ch][1], pin[ch][2]);
 				enemies.push(Enemy({
 					position: pos,
 					ch: ch,
