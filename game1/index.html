@@ -10,32 +10,37 @@
 	<script language="javascript" src="javascripts/jquery.hotkeys.js" type="text/javascript"></script>
 	<script language="javascript" src="javascripts/key_status.js" type="text/javascript"></script>
 	<script language="javascript" src="javascripts/util.js" type="text/javascript"></script>
-	<!-- script language="javascript" src="javascripts/sprite.js" type="text/javascript"></script-->
 	<script language="javascript" src="javascripts/sound.js" type="text/javascript"></script>
 
 	<style>
+	body {
+		background-color: black;
+		background-repeat: no-repeat;
+		background-size: cover;
+		}
+		
 	.button {
-		border: #AAAAAA;
-		border-width: 5px;
+		border: #333333;
+		border-width: 4px;
 		border-style: solid;
-		border-radius: 50px;
+		border-radius: 30px;
 		color: white;
 		background-color: #275D80;
-		padding: 3px;
+		/* padding: 3px; */
 		text-align: center;
-		font-size: 40px;
-		width: 120px;
-		height: 80px;
+		font-size: 30px;
+		width: 50px;
+		height: 50px;
 		cursor: pointer;
-		margin-bottom: 10px;
+		margin-right: -5px;
 	}
 
-	.b1 { background-color: #6D79AB; }
-	.b2 { background-color: #B595CB; }
-	.b3 { background-color: #7070f0; }
+	.b1 { background-color: #445588; }
+	.b2 { background-color: #995588; }
+	.b3 { background-color: #5555dd; }
 
 	.button:hover {
-		background-color: #444444;
+		background-color: #AAAAAA;
 	}
 
 	.button:active {
@@ -50,32 +55,33 @@
 
 	th {
 		font-family: "AR PL UKai HK";
-		font-size: 180px;
+		font-size: 100px;
 		font-weight: normal;
 		color: #cc0000;
 	}
 
 	td {
 		font-family: "Verdana";
-		font-size: 50px;
+		font-size: 25px;
 		color: #00FFEE;
 		text-align: center;
 	}
 	</style>
 	</head>
-	<body background="images/background5.jpg">
-	<iframe src="sounds/silence.mp3" allow="autoplay" style="display: none">
+
+	<img id="background" src="images/background-TheRing.jpg" width="100%">
+	<!-- body background="images/background-TheRing.jpg" -->
+		
+	<iframe src="sounds/silence.mp3" allow="autoplay" style="display:none">
 	</iframe>
 
 	<audio id="music" autoplay="true">
-  		<source src="sounds/background5.mp3" type="audio/mpeg">
-		<!-- source src="sounds/background2.mp3" type="audio/mpeg">
-		<source src="sounds/background3.mp3" type="audio/mpeg">
-		<source src="sounds/background4.mp3" type="audio/mpeg" -->
+  		<source src="sounds/music-horror.mp3" type="audio/mpeg">
 	</audio>
 
-	<p style="margin-left: 50px;">&nbsp;</p>
+	<div style="width: 100%; overflow: hidden;">
 
+	<div style="width: 50%; float: left;">
 	<table id="board">
 	  <tr>
 		<th id="char0">拼</th>
@@ -90,7 +96,8 @@
 		<td id="pinyin3">xi</td>
 	  </tr>
 	</table>
-	<br>
+	</div>
+	<div style="margin-left: 10px;">
 	<button class="button b1" onclick="butt('b')">
 		b</button>
 	<button class="button b1" onclick="butt('p')">
@@ -99,6 +106,14 @@
 		m</button>
 	<button class="button b1" onclick="butt('f')">
 		f</button>
+	<button class="button b3" onclick="butt('y')">
+		y</button>
+	<button class="button b2" onclick="butt('j')">
+		j</button>
+	<button class="button b2" onclick="butt('q')">
+		q</button>
+	<button class="button b2" onclick="butt('x')">
+		x</button>
 	<button class="button" onclick="player.shoot()" id="answer">
 		?</button>
 	<br>
@@ -110,6 +125,16 @@
 		n</button>
 	<button class="button b1" onclick="butt('l')">
 		l</button>	
+	<button class="button b3" onclick="butt('w')">
+		w</button>
+	<button class="button b2" onclick="butt('zh')">
+		zh</button>
+	<button class="button b2" onclick="butt('ch')">
+		ch</button>
+	<button class="button b2" onclick="butt('sh')">
+		sh</button>
+	<button class="button" onclick="nextSong()">
+		♫</button>
 	<br>
 	<button class="button b1" onclick="butt('g')">
 		g</button>
@@ -117,55 +142,51 @@
 		k</button>
 	<button class="button b1" onclick="butt('h')">
 		h</button>
+	<button class="button b3" onclick="butt(' ')">
+		&nbsp;</button>
 	<button class="button b3" onclick="butt('r')">
 		r</button>
-	<br>
-	<button class="button b2" onclick="butt('j')">
-		j</button>
-	<button class="button b2" onclick="butt('q')">
-		q</button>
-	<button class="button b2" onclick="butt('x')">
-		x</button>
-	<button class="button b3" onclick="butt('y')">
-		y</button>
-	<br>
-	<button class="button b2" onclick="butt('zh')">
-		zh</button>
-	<button class="button b2" onclick="butt('ch')">
-		ch</button>
-	<button class="button b2" onclick="butt('sh')">
-		sh</button>
-	<button class="button b3" onclick="butt('w')">
-		w</button>
-	<br>
 	<button class="button b2" onclick="butt('z')">
 		z</button>
 	<button class="button b2" onclick="butt('c')">
 		c</button>
 	<button class="button b2" onclick="butt('s')">
 		s</button>
-	<button class="button b3" onclick="butt(' ')">
-		&nbsp;</button>
+	<br>
+	<br>
+	<br>
+	</div>
+	</div>
 
 	<script type='text/javascript'>
+
+	var FPS = 10;			// frames per second, ie, how fast game objects are updated
+
+	themes = [
+		["music-horror.mp3", "background-TheRing.jpg"],
+		["music-BladeRunner.mp3", "background-BladeRunner.jpg"],
+		["music-CandyMan.mp3", "background-TheRing2.jpg"],
+		["music-TRON.mp3", "background-TRON.jpg"]];
 
 	function butt(ch) {
 		keybuff = ch;
 	}
 
-	var FPS = 10;
-
-	var song_idx = 5;
+	var song_idx = 0;
 	var music = document.getElementById("music");
-	$("#music").bind('ended', function() {
+	var background = document.getElementById("background");
+	$("#music").bind('ended', nextSong);
+
+	function nextSong() {
 		song_idx += 1;
-		if (song_idx >= 6)
-			song_idx = 1;
-		music.src = "sounds/background" + song_idx.toString() + ".mp3";
+		if (song_idx > 4)
+			song_idx = 0;
+		background.src = "images/" + themes[song_idx][1];
+		music.src = "sounds/" + themes[song_idx][0];
 		music.pause();
 		music.load();
 		music.play();
-	});
+		}
 
 	// *********** Read words into word list
 	var wordlist = new Array();
@@ -350,7 +371,7 @@
 		}
 
 		if(keydown.right) {
-		//	player.x += 5;
+			nextSong();
 		}
 
 		playerBullets.forEach(function(bullet) {
