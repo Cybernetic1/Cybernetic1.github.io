@@ -19,6 +19,7 @@
 		background-color: black;
 		background-repeat: no-repeat;
 		background-size: cover;
+		background-image: url('images/background-BladeRunner-mobile.jpg');
 		}
 
 	.button {
@@ -30,9 +31,9 @@
 		background-color: #275D80;
 		padding: 3px;
 		text-align: center;
-		font-size: 40px;
-		width: 80px;
-		height: 80px;
+		font-size: 50px;
+		width: 100px;
+		height: 100px;
 		cursor: pointer;
 		margin-right: -5px;
 		margin-bottom: 5px;
@@ -58,14 +59,14 @@
 
 	th {
 		font-family: "AR PL UKai HK";
-		font-size: 120px;
+		font-size: 150px;
 		font-weight: normal;
 		color: #cc0000;
 	}
 
 	td {
 		font-family: "Verdana";
-		font-size: 30px;
+		font-size: 50px;
 		color: #00FFEE;
 		text-align: center;
 	}
@@ -74,8 +75,6 @@
 
 	<iframe src="sounds/silence.mp3" allow="autoplay" style="display:none">
 	</iframe>
-
-	<img id="background" src="images/background-BladeRunner-mobile.jpg" width="100%">
 
 	<audio id="music" autoplay="true">
   		<source src="sounds/music-horror.mp3" type="audio/mpeg">
@@ -172,7 +171,7 @@
 	}
 
 	var song_idx = 0;
-	var background = document.getElementById("background");
+	// var background = document.getElementById("background");
 	var music = document.getElementById("music");
 	$("#music").bind('ended', nextSong);
 
@@ -180,7 +179,7 @@
 		song_idx += 1;
 		if (song_idx > 5)		// Total # of songs
 			song_idx = 0;
-		background.src = "images/" + themes[song_idx][1];
+		document.body.style.backgroundImage = "url('images/" + themes[song_idx][1] + "')";
 		music.src = "sounds/" + themes[song_idx][0];
 		music.pause();
 		music.load();
