@@ -19,24 +19,22 @@
 		background-color: black;
 		background-repeat: no-repeat;
 		background-size: cover;
-		background-image: url('images/background-Doris-mobile.jpg');
 		}
-
+		
 	.button {
 		border: #333333;
 		border-width: 4px;
 		border-style: solid;
-		border-radius: 100px;
+		border-radius: 30px;
 		color: white;
 		background-color: #275D80;
-		padding: 3px;
+		/* padding: 3px; */
 		text-align: center;
-		font-size: 100px;
-		width: 140px;
-		height: 140px;
+		font-size: 30px;
+		width: 50px;
+		height: 50px;
 		cursor: pointer;
 		margin-right: -5px;
-		margin-bottom: 5px;
 	}
 
 	.b1 { background-color: #445588; }
@@ -59,27 +57,33 @@
 
 	th {
 		font-family: "AR PL UKai HK";
-		font-size: 190px;
+		font-size: 100px;
 		font-weight: normal;
-		color: #ff0000;
+		color: #cc0000;
 	}
 
 	td {
 		font-family: "Verdana";
-		font-size: 100px;
+		font-size: 25px;
 		color: #00FFEE;
 		text-align: center;
 	}
 	</style>
 	</head>
 
+	<img id="background" src="images/background-TheRing.jpg" width="100%">
+	<!-- body background="images/background-TheRing.jpg" -->
+
 	<iframe src="sounds/silence.mp3" allow="autoplay" style="display:none">
 	</iframe>
 
 	<audio id="music" autoplay="true">
-  		<source src="sounds/music-流星雨.mp3" type="audio/mpeg">
+  		<source src="sounds/music-horror.mp3" type="audio/mpeg">
 	</audio>
 
+	<div style="width: 100%; overflow: hidden;">
+
+	<div style="width: 50%; float: left;">
 	<table id="board">
 	  <tr>
 		<th id="char0">拼</th>
@@ -94,8 +98,8 @@
 		<td id="pinyin3">xì</td>
 	  </tr>
 	</table>
-	<br>
-
+	</div>
+	<div style="margin-left: 10px;">
 	<button class="button b1" onclick="butt('b')">
 		b</button>
 	<button class="button b1" onclick="butt('p')">
@@ -104,32 +108,8 @@
 		m</button>
 	<button class="button b1" onclick="butt('f')">
 		f</button>
-	<br>
-	<button class="button b1" onclick="butt('d')">
-		d</button>
-	<button class="button b1" onclick="butt('t')">
-		t</button>
-	<button class="button b1" onclick="butt('n')">
-		n</button>
-	<button class="button b1" onclick="butt('l')">
-		l</button>	
-	<br>
-	<button class="button b1" onclick="butt('g')">
-		g</button>
-	<button class="button b1" onclick="butt('k')">
-		k</button>
-	<button class="button b1" onclick="butt('h')">
-		h</button>
-	<br>
 	<button class="button b3" onclick="butt('y')">
 		y</button>
-	<button class="button b3" onclick="butt('w')">
-		w</button>
-	<button class="button b3" onclick="butt('r')">
-		r</button>
-	<button class="button b3" onclick="butt(' ')">
-		&nbsp;</button>
-	<br>
 	<button class="button b2" onclick="butt('j')">
 		j</button>
 	<button class="button b2" onclick="butt('q')">
@@ -139,6 +119,16 @@
 	<button class="button" onclick="player.shoot()" id="answer">
 		?</button>
 	<br>
+	<button class="button b1" onclick="butt('d')">
+		d</button>
+	<button class="button b1" onclick="butt('t')">
+		t</button>
+	<button class="button b1" onclick="butt('n')">
+		n</button>
+	<button class="button b1" onclick="butt('l')">
+		l</button>	
+	<button class="button b3" onclick="butt('w')">
+		w</button>
 	<button class="button b2" onclick="butt('zh')">
 		zh</button>
 	<button class="button b2" onclick="butt('ch')">
@@ -148,38 +138,49 @@
 	<button class="button" onclick="nextSong()">
 		♫</button>
 	<br>
+	<button class="button b1" onclick="butt('g')">
+		g</button>
+	<button class="button b1" onclick="butt('k')">
+		k</button>
+	<button class="button b1" onclick="butt('h')">
+		h</button>
+	<button class="button b3" onclick="butt(' ')">
+		&nbsp;</button>
+	<button class="button b3" onclick="butt('r')">
+		r</button>
 	<button class="button b2" onclick="butt('z')">
 		z</button>
 	<button class="button b2" onclick="butt('c')">
 		c</button>
 	<button class="button b2" onclick="butt('s')">
 		s</button>
+	</div>
+	</div>
 
 	<script type='text/javascript'>
 
 	var FPS = 10;			// frames per second, ie, how fast game objects are updated
 
-	var themes = [
-		["music-流星雨.mp3", "background-Doris-mobile.jpg"],
-		["music-BladeRunner.mp3", "background-BladeRunner-mobile.jpg"],
+	themes = [
 		["music-horror.mp3", "background-TheRing.jpg"],
-		["music-CandyMan.mp3", "background-TheRing2-mobile.jpg"],
-		["music-Beethoven-7-2-A.mp3", "background-BladeRunner-mobile.jpg"],
-		["music-TRON.mp3", "background-TRON-mobile.jpg"]];
+		["music-BladeRunner.mp3", "background-BladeRunner.jpg"],
+		["music-CandyMan.mp3", "background-TheRing2.jpg"],
+		["music-TRON.mp3", "background-TRON.jpg"]];
 
 	function butt(ch) {
 		keybuff = ch;
 	}
 
-	var song_idx = -1;
+	var song_idx = 0;
 	var music = document.getElementById("music");
+	var background = document.getElementById("background");
 	$("#music").bind('ended', nextSong);
 
 	function nextSong() {
 		song_idx += 1;
-		if (song_idx > 6)		// Total # of songs
+		if (song_idx > 4)
 			song_idx = 0;
-		document.body.style.backgroundImage = "url('images/" + themes[song_idx][1] + "')";
+		background.src = "images/" + themes[song_idx][1];
 		music.src = "sounds/" + themes[song_idx][0];
 		music.pause();
 		music.load();
