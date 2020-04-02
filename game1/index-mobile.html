@@ -72,10 +72,10 @@
 	</style>
 	</head>
 
-	<body background="images/background-TheRing.jpg">
-
 	<iframe src="sounds/silence.mp3" allow="autoplay" style="display:none">
 	</iframe>
+
+	<img id="background" src="images/background-BladeRunner-mobile.jpg" width="100%">
 
 	<audio id="music" autoplay="true">
   		<source src="sounds/music-horror.mp3" type="audio/mpeg">
@@ -172,15 +172,15 @@
 	}
 
 	var song_idx = 0;
+	var background = document.getElementById("background");
 	var music = document.getElementById("music");
-	// var background = document.body.style.backgroundImage;
 	$("#music").bind('ended', nextSong);
 
 	function nextSong() {
 		song_idx += 1;
 		if (song_idx > 5)		// Total # of songs
 			song_idx = 0;
-		document.body.style.backgroundImage = "url('images/" + themes[song_idx][1] + "')";
+		background.src = "images/" + themes[song_idx][1];
 		music.src = "sounds/" + themes[song_idx][0];
 		music.pause();
 		music.load();
