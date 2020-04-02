@@ -74,13 +74,17 @@
 	<img id="background" src="images/background-TheRing.jpg" width="100%">
 	<!-- body background="images/background-TheRing.jpg" -->
 
-	<object id="music" height="0px" width="0px" data="sounds/music-horror.mp3" type="audio/mpeg" >
+	<audio id="music" autoplay="true">
+  		<source src="sounds/music-流星雨.mp3" type="audio/mpeg">
+	</audio>
+
+	<!-- object id="music" height="0px" width="0px" data="sounds/music-horror.mp3" type="audio/mpeg" >
 		<param name="autostart" value="true" />
 		<param name="loop" value="true" />
 		<param name="src" value="sounds/music-horror.mp3"/>
 		<embed src="sounds/music-horror.mp3" autostart="true" loop="true">
-	</object>
-	
+	</object -->
+
 	<!-- bgsound id="music" src="sounds/music-horror.mp3" loop="infinite" -->
 
 	<div style="width: 100%; overflow: hidden;">
@@ -173,7 +177,7 @@
 		keybuff = ch;
 	}
 
-	var song_idx = 0;
+	var song_idx = -1;
 	var music = document.getElementById("music");
 	var background = document.getElementById("background");
 	$("#music").bind('ended', nextSong);
