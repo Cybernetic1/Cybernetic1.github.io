@@ -1,4 +1,4 @@
-// pinyin symbols used in this document: āáăàēéĕèīíĭìōóŏòūúŭùü
+// special phonetic symbols used in this document: āáăàēéĕèīíĭìōóŏòūúŭùü
 var polyphonic= new Object ();
 polyphonic['阿']=[
 	['ā', "～訇 ～罗汉 ～木林 ～姨"],
@@ -245,11 +245,11 @@ polyphonic['勾']=[
 	['gòu', "～当"],
 	];
 polyphonic['估']=[
-	['gū', ""],	// normally, except...
+	['gū', "*"],	// normally, except...
 	['gù', "～衣"],
 	];
 polyphonic['骨']=[
-	['gŭ', ""],	// normally, except...
+	['gŭ', "*"],	// normally, except...
 	['gū', "～碌 ～朵"], 
 	];
 polyphonic['谷']=[
@@ -264,7 +264,7 @@ polyphonic['桧']=[
 	['huì', "秦～"],	// （人名）
 	];
 polyphonic['过']=[
-	['guò', ""],	// normally, except...
+	['guò', "*"],	// normally, except...
 	['guō', ""],	// 姓氏
 	];
 polyphonic['虾']=[
@@ -404,11 +404,8 @@ polyphonic['卡']=[
 	['kă', "～宾枪 ～车 ～介苗 ～片 ～通"],
 	['qiă', "～子 关～"],
 	];
-polyphonic['看']=[
-	['kān', "～管 ～护 ～守"],
-	];
 polyphonic['坷']=[
-	['kē', "～拉（垃）"],
+	['kē', "～拉"],	// 垃
 	];
 polyphonic['壳']=[
 	['ké', "～儿 贝～儿 脑～ 驳～枪"],	//（语）
@@ -441,7 +438,7 @@ polyphonic['勒']=[
 	['lēi', "多单用。"],	//（语）
 	];
 polyphonic['擂']=[
-	['léi', ""],	// normally, except...
+	['léi', "*"],	// normally, except...
 	['lèi', "～台 打～"],
 	];
 polyphonic['累']=[
@@ -507,7 +504,7 @@ polyphonic['落']=[
 	['là', "丢三～四 ～在后面"],	//（语）遗落
 	];
 polyphonic['脉']=[
-	['mài', ""],	// normally, except...
+	['mài', "*"],	// normally, except...
 	['mòmò', "～～"],
 	];
 polyphonic['蔓']=[
@@ -526,7 +523,7 @@ polyphonic['靡']=[
 	['mĭ', "风～ 委～ 披～"],
 	];
 polyphonic['秘']=[
-	['mì', ""],	// normally, except...
+	['mì', "*"],	// normally, except...
 	['bì', "～鲁"],
 	];
 polyphonic['泌']=[
@@ -864,7 +861,7 @@ polyphonic['喳']=[
 	['zhā', "唧唧～～"],
 	];
 polyphonic['轧']=[
-	['yà', ""],	// normally, except...
+	['yà', "*"],	// normally, except...
 	['zhá', "～钢 ～辊"],
 	// gá 为方言，不审
 	];
@@ -920,6 +917,6 @@ polyphonic['柞']=[
 	['zhà', "～水"],	// 在陕西
 	];
 polyphonic['作']=[
-	['zuò', ""],	// normally, except...
+	['zuò', "*"],	// normally, except...
 	['zuō', "～坊"],
 	];

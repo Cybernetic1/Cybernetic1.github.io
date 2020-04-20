@@ -1,7 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<!-- Originally from: https://github.com/STRd6/space_demo -->
+<!-- This code is adapted from an HTML game: https://github.com/STRd6/space_demo -->
+
+<!-- TO-DO:
+	1. display last word information at bottom of page
+-->
 
 <html>
 	<head>
@@ -15,8 +19,8 @@
 	<script language="javascript" src="javascripts/sound.js" type="text/javascript"></script>
 
 	<script language="javascript" src="pinyins.js" type="text/javascript"></script>
-	<script language="javascript" src="Mandarin-统读字.js" type="text/javascript"></script>
-	<script language="javascript" src="Mandarin-异读词-only.js" type="text/javascript"></script>
+	<script language="javascript" src="Mandarin-统一读音字.js" type="text/javascript"></script>
+	<script language="javascript" src="Mandarin-异读词.js" type="text/javascript"></script>
 
 	<style>
 	body {
@@ -74,6 +78,10 @@
 		color: #00FFEE;
 		text-align: center;
 	}
+
+	p {
+		color: #ff0000;
+	}
 	</style>
 	</head>
 
@@ -108,6 +116,8 @@
 		m</button>
 	<button class="button b1" onclick="butt('f')">
 		f</button>
+	<button class="button" onclick="player.shoot()" id="answer">
+		?</button>
 	<br>
 	<button class="button b1" onclick="butt('d')">
 		d</button>
@@ -117,6 +127,8 @@
 		n</button>
 	<button class="button b1" onclick="butt('l')">
 		l</button>	
+	<button class="button" onclick="nextSong()">
+		♫</button>
 	<br>
 	<button class="button b1" onclick="butt('g')">
 		g</button>
@@ -124,6 +136,10 @@
 		k</button>
 	<button class="button b1" onclick="butt('h')">
 		h</button>
+	<button class="button b1" onclick="butt(' ')">
+		&nbsp;</button>
+	<button class="button" onclick="nextWord()">
+		↠</button>
 	<br>
 	<button class="button b3" onclick="butt('y')">
 		y</button>
@@ -131,8 +147,6 @@
 		w</button>
 	<button class="button b3" onclick="butt('r')">
 		r</button>
-	<button class="button b3" onclick="butt(' ')">
-		&nbsp;</button>
 	<br>
 	<button class="button b2" onclick="butt('j')">
 		j</button>
@@ -140,8 +154,6 @@
 		q</button>
 	<button class="button b2" onclick="butt('x')">
 		x</button>
-	<button class="button" onclick="player.shoot()" id="answer">
-		?</button>
 	<br>
 	<button class="button b2" onclick="butt('zh')">
 		zh</button>
@@ -149,8 +161,6 @@
 		ch</button>
 	<button class="button b2" onclick="butt('sh')">
 		sh</button>
-	<button class="button" onclick="nextSong()">
-		♫</button>
 	<br>
 	<button class="button b2" onclick="butt('z')">
 		z</button>
@@ -159,12 +169,15 @@
 	<button class="button b2" onclick="butt('s')">
 		s</button>
 
+	<p id="remarks">Remark</p>
 
 	<script type='text/javascript'>
 
 	// *********** Read words into word list
 	var wordlist = new Array();
 	var num_words = 0;
+
+	const FPS = 10;			// frames per second, ie, how fast game objects are updated
 
 	fetch('https://cybernetic1.github.io/game1/chinese-words.txt')
 	  .then((response) => {
@@ -184,9 +197,28 @@
 				});
 			});
 		console.log("num_words = ", num_words);
+
+		setInterval(function() {
+			update();
+			draw();
+		}, 1000 / FPS);
+
 	  });
 
-	var FPS = 10;			// frames per second, ie, how fast game objects are updated
+	// Check if the words in 统一读音字.js are the same as defined in "pinyins.js" ?
+	for (const key in pin2) {
+		pinyin1 = pin[key];
+		pinyin2 = pin2[key];
+		if (pinyin1 === undefined)
+			console.log("missing", key);
+		else {
+			if (pinyin1[0] != pinyin2[0])
+				console.log("mismatch", key, pinyin1[0], pinyin2[0]);
+			tone2 = extract_tone(pinyin2[1]);
+			if (pinyin1[2] != tone2)
+				console.log("mismatch", key, pinyin1[2], tone2);
+		}
+	}
 
 	var themes = [
 		["music-流星雨.mp3", "background-Doris-mobile.jpg"],
@@ -308,12 +340,7 @@
 		return I;
 	};
 
-	setInterval(function() {
-		update();
-		draw();
-	}, 1000/FPS);
-
-	function display_pinyin(nucleus, tone) {
+	function pretty_pinyin(nucleus, tone) {
 		// var nucleus = pinyins[1];
 		// var tone = pinyins[2];
 		var str2 = "";
@@ -335,7 +362,7 @@
 		}
 		else if (tone == 3) {
 			if (nucleus[0] == 'a') n0 = 'ă';
-			if (nucleus[0] == 'e') n0 = 'ě';
+			if (nucleus[0] == 'e') n0 = 'ĕ';
 			if (nucleus[0] == 'i') n0 = 'ĭ';
 			if (nucleus[0] == 'o') n0 = 'ŏ';
 			if (nucleus[0] == 'u') n0 = 'ŭ';
@@ -351,6 +378,21 @@
 			return nucleus;  	// tone.toString()
 		else
 			return n0 + nucleus.substr(1);
+	}
+
+	function extract_tone(pinyin) {
+		var tone = 0;
+		for (const ch of pinyin) {
+			if (['ā', 'ē', 'ī', 'ō', 'ū'].includes(ch))
+				tone = 1;
+			if (['á', 'é', 'í', 'ó', 'ú'].includes(ch))
+				tone = 2;
+			if (['ă', 'ĕ', 'ĭ', 'ŏ', 'ŭ'].includes(ch))
+				tone = 3;
+			if (['à', 'è', 'ì', 'ò', 'ù'].includes(ch))
+				tone = 4;
+		}
+		return tone;
 	}
 
 	function update() {
@@ -399,13 +441,33 @@
 		if (enemies.length == 0) {
 			currentActive = 0;
 			var text = wordlist[Math.floor(Math.random() * num_words)];
+
+			text = "行动";
+			// Check occurrence of 异读字 in text
+			var remarks = document.getElementById("remarks");
+			remarks.innerText = "";
+			for (const ch of text) {
+				remarks.innerText += ch;
+				var phone_list = polyphonic[ch];
+				if (typeof phone_list === 'object') {
+					console.log("异读字", ch, text);
+					for (var i = 0; i < phone_list.length; ++i) {
+						var phoneme = phone_list[i][0];
+						var examples = phone_list[i][1];
+						// perhaps display on web page
+						console.log("phone:", phoneme, examples);
+						remarks.innerText += phoneme + examples + "\n";
+					}
+				}
+			}
+
 			var pos = 0;
 			for (var len = text.length; pos < len; ++pos) {
 				var ch = text[pos];
 				var answer = pin[ch][0];
 				if (answer == '')		// if no consonent, require an empty ' '
 					answer = ' ';
-				var question = '_' + display_pinyin(pin[ch][1], pin[ch][2]);
+				var question = '_' + pretty_pinyin(pin[ch][1], pin[ch][2]);
 				enemies.push(Enemy({
 					position: pos,
 					ch: ch,
